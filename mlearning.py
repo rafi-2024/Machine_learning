@@ -50,4 +50,18 @@ rf_result = pd.DataFrame(["Forrest Regression", rf_test_mse, rf_test_r2, rf_trai
 rf_result.columns =["Method", "Training MSE", "Training R2", "Test MSE", "Test R2"]
 # print(rf_result)
 all_result = pd.concat([result,rf_result], axis=0).reset_index(drop=True)
-print(all_result)
+
+# Data visualization
+import matplotlib.pyplot as plt
+import numpy as np
+plt.figure(figsize=(5,5))
+plt.scatter(x=y_train,y=y_lr_train_pred,c="Green", alpha=0.3)
+# Make a trend line
+z = np.polyfit(y_train,y_lr_train_pred,1)
+p = np.poly1d(z)
+plt.plot(y_train,p(y_train),"Red")
+# plot labels
+plt.ylabel("Predicted LogS")
+plt.xlabel("Experimental LogS")
+plt.show()
+
